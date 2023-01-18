@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import Map, { Marker } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import "./app.css";
 
 function App() {
   const [viewState, setViewState] = useState({
@@ -24,8 +26,29 @@ function App() {
         offsetLeft={-20}
         offsetTop={-10}
       >
-        <LocationOnIcon fontSize="large" />
+        <LocationOnIcon fontSize="large" color="primary" />
       </Marker>
+      {/* <Popup longitude={2.294694} latitude={48.858093} anchor="left">
+        <div className="popup">
+          <label>Place</label>
+          <h4 className="place-name">Eiffell Tower</h4>
+          <label>Review</label>
+          <p className="description">Beautiful place</p>
+          <label>Rating</label>
+          <div className="stars">
+            <StarIcon className="star" />
+            <StarIcon className="star" />
+            <StarIcon className="star" />
+            <StarIcon className="star" />
+            <StarIcon className="star" />
+          </div>
+          <label>Information </label>
+          <span className="username">
+            Created by <b>Bob</b>
+          </span>
+          <span className="date">1 hour ago</span>
+        </div>
+  </Popup> */}
     </Map>
   );
 }

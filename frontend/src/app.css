@@ -1,0 +1,32 @@
+.popup {
+  width: 240px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: medium;
+}
+
+label {
+  width: max-content;
+  color: tomato;
+  font-size: 14px;
+  border-bottom: 0.5px solid tomato;
+  margin: 3px 0;
+}
+
+.description {
+  font-size: 16px;
+}
+
+.star {
+  color: gold;
+}
+
+.username {
+  font-size: 14px;
+}
+
+.date {
+  font-size: 12px;
+}
