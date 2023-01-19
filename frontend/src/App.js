@@ -9,9 +9,13 @@ import axios from "axios";
 import { format } from "timeago.js";
 
 function App() {
+  let currentUser = "Elle";
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [pins, setPins] = useState([]);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [rating, setRating] = useState(0);
   const [viewState, setViewState] = useState({
     longitude: 17,
     latitude: 46,
@@ -40,6 +44,26 @@ function App() {
       lat,
       long,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPin = {
+      username: currentUser,
+      title,
+      description,
+      rating,
+      lat: newPlace.lat,
+      long: newPlace.long,
+    };
+
+    try {
+      const res = await axios.post("/pins", newPin);
+      setPins([...pins, res.data]);
+      setNewPlace(null); //not to see popup
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -102,13 +126,19 @@ function App() {
           onClose={() => setNewPlace(null)}
         >
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <label>Title</label>
-              <input placeholder="enter a title"></input>
+              <input
+                placeholder="enter a title"
+                onChange={(e) => setTitle(e.target.value)}
+              ></input>
               <label>Review</label>
-              <textarea placeholder="say smth"></textarea>
+              <textarea
+                placeholder="say smth"
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
               <label>Rating</label>
-              <select>
+              <select onChange={(e) => setRating(e.target.value)}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
