@@ -41,10 +41,9 @@ function App() {
       mapboxAccessToken="pk.eyJ1Ijoic3VwZXJzb25pazAwMiIsImEiOiJjbGQyNDdtYXcwNTY0M3FvMHR5MWxlOTNhIn0.7p9dBpNC0r7agArQmP4H0w"
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
-      {pins.map((pin, k) => (
+      {pins.map((pin) => (
         <>
           <Marker
-            key={k}
             longitude={pin.long}
             latitude={pin.lat}
             offsetLeft={-20}
@@ -56,6 +55,7 @@ function App() {
           </Marker>
           {pin._id === currentPlaceId && (
             <Popup
+              key={pin._id}
               longitude={pin.long}
               latitude={pin.lat}
               anchor="left"
@@ -70,11 +70,7 @@ function App() {
                 <p className="description">{pin.description}</p>
                 <label>Rating</label>
                 <div className="stars">
-                  <StarIcon className="star" />
-                  <StarIcon className="star" />
-                  <StarIcon className="star" />
-                  <StarIcon className="star" />
-                  <StarIcon className="star" />
+                  {Array(pin.rating).fill(<StarIcon className="star" />)}
                 </div>
                 <label>Information </label>
                 <span className="username">
