@@ -10,6 +10,7 @@ import { format } from "timeago.js";
 
 function App() {
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [newPlace, setNewPlace] = useState(null);
   const [pins, setPins] = useState([]);
   const [viewState, setViewState] = useState({
     longitude: 17,
@@ -33,6 +34,14 @@ function App() {
     setCurrentPlaceId(id);
   };
 
+  const handleAddClick = (e) => {
+    const [long, lat] = e.lngLat.toArray();
+    setNewPlace({
+      lat,
+      long,
+    });
+  };
+
   return (
     <Map
       {...viewState}
@@ -40,6 +49,7 @@ function App() {
       style={{ width: "100vw", height: "100vh" }}
       mapboxAccessToken="pk.eyJ1Ijoic3VwZXJzb25pazAwMiIsImEiOiJjbGQyNDdtYXcwNTY0M3FvMHR5MWxlOTNhIn0.7p9dBpNC0r7agArQmP4H0w"
       mapStyle="mapbox://styles/mapbox/streets-v9"
+      onDblClick={handleAddClick}
     >
       {pins.map((pin) => (
         <>
@@ -82,6 +92,36 @@ function App() {
           )}
         </>
       ))}
+      {newPlace && (
+        <Popup
+          latitude={newPlace.lat}
+          longitude={newPlace.long}
+          closeButton={true}
+          closeOnClick={false}
+          anchor="left"
+          onClose={() => setNewPlace(null)}
+        >
+          <div>
+            <form>
+              <label>Title</label>
+              <input placeholder="enter a title"></input>
+              <label>Review</label>
+              <textarea placeholder="say smth"></textarea>
+              <label>Rating</label>
+              <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button className="btn" type="submit">
+                Add pin
+              </button>
+            </form>
+          </div>
+        </Popup>
+      )}
     </Map>
   );
 }
