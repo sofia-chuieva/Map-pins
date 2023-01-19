@@ -60,3 +60,27 @@ textarea::placeholder {
   background-color: tomato;
   cursor: pointer;
 }
+
+.button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.logout {
+  background-color: tomato;
+}
+.login {
+  background-color: cornflowerblue;
+}
+.register {
+  background-color: darkorchid;
+}
+.buttons,
+.logout {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
