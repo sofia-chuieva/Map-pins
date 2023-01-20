@@ -7,15 +7,21 @@ import IconButton from "@mui/material/IconButton";
 import "./styles/app.css";
 import axios from "axios";
 import { format } from "timeago.js";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
 
 function App() {
-  let [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(
+    sessionStorage.getItem("user")
+  );
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [pins, setPins] = useState([]);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [rating, setRating] = useState(0);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [viewState, setViewState] = useState({
     longitude: 17,
     latitude: 46,
@@ -33,6 +39,11 @@ function App() {
     };
     getPins();
   }, []);
+
+  const handleLogOut = () => {
+    sessionStorage.removeItem("user");
+    setCurrentUser(null);
+  };
 
   const handleMarkerClick = (id) => {
     setCurrentPlaceId(id);
@@ -156,12 +167,34 @@ function App() {
 
         <>
           {currentUser ? (
-            <button className="logout button">Logout</button>
+            <div className="containerLogOut">
+              <h4 className="welcomeUser">Welcome, {currentUser}</h4>
+              <button className="logout button" onClick={handleLogOut}>
+                Logout
+              </button>
+            </div>
           ) : (
             <div className="buttons">
-              <button className="login button">Login</button>
-              <button className="register button">Register</button>
+              <button
+                className="login button"
+                onClick={() => setShowLogin(true)}
+              >
+                Login
+              </button>
+              <button
+                className="register button"
+                onClick={() => setShowRegister(true)}
+              >
+                Register
+              </button>
             </div>
+          )}
+          {showRegister && <Register setShowRegister={setShowRegister} />}
+          {showLogin && (
+            <Login
+              setShowLogin={setShowLogin}
+              setCurrentUser={setCurrentUser}
+            />
           )}
         </>
       </Map>

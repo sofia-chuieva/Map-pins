@@ -1,0 +1,48 @@
+.registerContainer {
+  width: 300px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reg {
+  border: none;
+  color: white;
+  background-color: darkorchid;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input {
+  padding: 5px;
+}
+
+.success {
+  text-align: center;
+  color: green;
+  font-size: 14px;
+}
+
+.error {
+  text-align: center;
+  color: tomato;
+  font-size: 14px;
+}
+.cancel {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
