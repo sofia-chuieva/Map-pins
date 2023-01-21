@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 });
 
 //get all pins
-router.get("/", async (req, res) => {
+router.get("/", async (_, res) => {
   try {
     const pins = await Pin.find();
     res.status(200).json(pins);
@@ -22,4 +22,15 @@ router.get("/", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+//delete pin
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletePin = await Pin.deleteOne({ _id: req.params.id });
+    res.status(200).json(deletePin);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

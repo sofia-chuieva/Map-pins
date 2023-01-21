@@ -6,6 +6,8 @@ const userRoute = require("./routes/users");
 const pinRoute = require("./routes/pins");
 app.use(express.json());
 
+mongoose.Schema.Types.String.checkRequired((v) => typeof v === "string");
+
 dotenv.config();
 
 mongoose
