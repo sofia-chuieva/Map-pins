@@ -29,16 +29,17 @@ function App() {
   });
 
   useEffect(() => {
-    const getPins = async () => {
-      try {
-        const res = await axios.get("/pins");
-        setPins(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getPins();
   }, []);
+
+  const getPins = async () => {
+    try {
+      const res = await axios.get("/pins");
+      setPins(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleLogOut = () => {
     sessionStorage.removeItem("user");
@@ -57,19 +58,28 @@ function App() {
     });
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/pins/${id}`);
+      getPins();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newPin = {
-      username: currentUser,
-      title,
-      description,
-      rating,
-      lat: newPlace.lat,
-      long: newPlace.long,
-    };
 
     try {
-      const res = await axios.post("/pins", newPin);
+      const res = await axios.post("/pins", {
+        username: currentUser,
+        title,
+        description,
+        rating,
+        lat: newPlace.lat,
+        long: newPlace.long,
+      });
+
       setPins([...pins, res.data]);
       setNewPlace(null); //not to see popup
     } catch (error) {
@@ -123,12 +133,19 @@ function App() {
                     Created by <b>{pin.username}</b>
                   </span>
                   <span className="date">{format(pin.createdAt)}</span>
+                  <button
+                    className="delete-btn"
+                    disabled={currentUser !== pin.username}
+                    onClick={() => handleDelete(pin._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </Popup>
             )}
           </>
         ))}
-        {newPlace && (
+        {newPlace && currentUser && (
           <Popup
             latitude={newPlace.lat}
             longitude={newPlace.long}
@@ -141,16 +158,18 @@ function App() {
               <form onSubmit={handleSubmit}>
                 <label>Title</label>
                 <input
+                  required
                   placeholder="enter a title"
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>
                 <label>Review</label>
                 <textarea
-                  placeholder="say smth"
+                  required
+                  placeholder="say review"
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
                 <label>Rating</label>
-                <select onChange={(e) => setRating(e.target.value)}>
+                <select required onChange={(e) => setRating(e.target.value)}>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>

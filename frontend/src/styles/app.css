@@ -1,6 +1,6 @@
 .popup {
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -28,16 +28,17 @@ label {
 }
 
 .date {
-  font-size: 12px;
+  font-size: 10px;
+  color: gray;
 }
 
 form {
-  width: 240px;
-  height: 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: medium;
+  width: 260px;
+  height: 280px;
 }
 
 input,
@@ -57,7 +58,7 @@ textarea::placeholder {
   padding: 5px;
   border-radius: 5px;
   color: white;
-  background-color: tomato;
+  background-color: teal;
   cursor: pointer;
 }
 
@@ -101,4 +102,20 @@ textarea::placeholder {
 .welcomeUser {
   margin-top: 18px;
   font-size: 20px;
+}
+
+.delete-btn {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: tomato;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.delete-btn:disabled {
+  background-color: rgb(174, 71, 52);
+  color: rgb(187, 183, 183);
+  cursor: default;
 }

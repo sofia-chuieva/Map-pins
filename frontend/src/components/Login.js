@@ -1,24 +1,22 @@
 import "../styles/login.css";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export const Login = ({ setShowLogin, setCurrentUser }) => {
   const [error, setError] = useState(false);
-  const nameRef = useRef();
-  const passwordRef = useRef();
+  const [name, setName] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = {
-      username: nameRef.current.value,
-      password: passwordRef.current.value,
-    };
-
     try {
-      const res = await axios.post("/users/login", user);
+      const res = await axios.post("/users/login", {
+        username: name,
+        password: password,
+      });
       sessionStorage.setItem("user", res.data.username);
       setCurrentUser(res.data.username);
       setShowLogin(false);
@@ -34,8 +32,18 @@ export const Login = ({ setShowLogin, setCurrentUser }) => {
         <AccountCircleIcon fontSize="large" />
       </div>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="username" ref={nameRef}></input>
-        <input type="password" placeholder="password" ref={passwordRef}></input>
+        <input
+          required
+          type="text"
+          placeholder="username"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          required
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button className="login-btn">Login</button>
 
         {error && <span className="error">Error</span>}

@@ -1,28 +1,26 @@
 import "../styles/register.css";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export const Register = ({ setShowRegister }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newUser = {
-      username: nameRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-
     try {
-      await axios.post("/users/register", newUser);
+      await axios.post("/users/register", {
+        username: name,
+        email: email,
+        password: password,
+      });
       setError(false);
       setSuccess(true);
     } catch (err) {
@@ -36,9 +34,24 @@ export const Register = ({ setShowRegister }) => {
         <AccountCircleIcon fontSize="large" />
       </div>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="username" ref={nameRef}></input>
-        <input type="email" placeholder="email" ref={emailRef}></input>
-        <input type="password" placeholder="password" ref={passwordRef}></input>
+        <input
+          required
+          type="text"
+          placeholder="username"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          required
+          type="email"
+          placeholder="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          required
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
         <button className="reg">Register</button>
         {success && <span className="success">Successfull registration</span>}
         {error && <span className="error">Error</span>}
