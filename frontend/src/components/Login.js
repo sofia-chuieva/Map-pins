@@ -13,7 +13,7 @@ export const Login = ({ setShowLogin, setCurrentUser }) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/users/login", {
+      const res = await axios.post(`${process.env.REACT_APP_URL}/users/login`, {
         username: name,
         password: password,
       });

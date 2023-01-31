@@ -34,7 +34,7 @@ function App() {
 
   const getPins = async () => {
     try {
-      const res = await axios.get("/pins");
+      const res = await axios.get(`${process.env.REACT_APP_URL}/pins`);
       setPins(res.data);
     } catch (error) {
       console.log(error);
@@ -60,7 +60,7 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/pins/${id}`);
+      await axios.delete(`${process.env.REACT_APP_URL}/pins/${id}`);
       getPins();
     } catch (error) {
       console.log(error);
@@ -71,7 +71,7 @@ function App() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/pins", {
+      const res = await axios.post(`${process.env.REACT_APP_URL}/pins`, {
         username: currentUser,
         title,
         description,
@@ -93,7 +93,7 @@ function App() {
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
         style={{ width: "100vw", height: "100vh" }}
-        mapboxAccessToken="pk.eyJ1Ijoic3VwZXJzb25pazAwMiIsImEiOiJjbGQyNDdtYXcwNTY0M3FvMHR5MWxlOTNhIn0.7p9dBpNC0r7agArQmP4H0w"
+        mapboxAccessToken={process.env.REACT_APP_MAP_API}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         onDblClick={handleAddClick}
       >
