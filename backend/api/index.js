@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const app = express();
-const userRoute = require("./routes/users");
-const pinRoute = require("./routes/pins");
+const userRoute = require("../routes/users");
+const pinRoute = require("../routes/pins");
 app.use(express.json());
 
 app.use(cors());
@@ -26,3 +26,5 @@ app.use("/api/pins", pinRoute);
 app.listen(process.env.API_PORT, () => {
   console.log("server is running");
 });
+
+module.exports = app;
