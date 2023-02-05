@@ -2,7 +2,7 @@
 
 ## Website link: https://map-pin-app-zv2u.vercel.app/
 
-Map Pins is a website for saving impressions of places, users can put pins on map and sharing their thoughts. Inspired by Youtube tutorial, and changed by me.
+Map Pins is a website for saving impressions of places, users can put pins on map and share their thoughts. Inspired by Youtube tutorial, and changed by me.
 
 #### The purpose of this project was to learn and practice some aspects, like:
 
