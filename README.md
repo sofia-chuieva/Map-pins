@@ -10,6 +10,8 @@ Map Pins is a website for saving impressions of places, users can put pins on ma
 * Material UI library
 * MongoDB 
 * Express & Node.js
+* bcrypt.js for hashing passwords
+* [MapBox Api](https://docs.mapbox.com/#maps) for creating map
 * Testing API Endpoints (Postman)
 * Deploying with Vercel
 
