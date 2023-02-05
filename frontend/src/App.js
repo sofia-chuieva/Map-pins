@@ -35,7 +35,6 @@ function App() {
   const getPins = async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_URL}/pins`);
-      const res = await axios.get("https://map-pin-app.vercel.app/api/pins");
       setPins(res.data);
     } catch (error) {
       console.log(error);
