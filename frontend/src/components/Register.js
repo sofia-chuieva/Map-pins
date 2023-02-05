@@ -16,7 +16,7 @@ export const Register = ({ setShowRegister }) => {
     e.preventDefault();
 
     try {
-      await axios.post("https://map-pin-app.vercel.app/api/users/register", {
+      await axios.post(`${process.env.REACT_APP_URL}/users/register`, {
         username: name,
         email: email,
         password: password,

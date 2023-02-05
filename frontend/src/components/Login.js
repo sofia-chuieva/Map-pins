@@ -13,13 +13,10 @@ export const Login = ({ setShowLogin, setCurrentUser }) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://map-pin-app.vercel.app/api/users/login",
-        {
-          username: name,
-          password: password,
-        }
-      );
+      const res = await axios.post(`${process.env.REACT_APP_URL}users/login`, {
+        username: name,
+        password: password,
+      });
       sessionStorage.setItem("user", res.data.username);
       setCurrentUser(res.data.username);
       setShowLogin(false);
