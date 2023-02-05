@@ -14,7 +14,7 @@ export const Login = ({ setShowLogin, setCurrentUser }) => {
 
     try {
       const res = await axios.post(
-        "https://map-pin-app.vercel.app/users/login",
+        "https://map-pin-app.vercel.app/api/users/login",
         {
           username: name,
           password: password,

@@ -34,7 +34,7 @@ function App() {
 
   const getPins = async () => {
     try {
-      const res = await axios.get("https://map-pin-app.vercel.app/pins");
+      const res = await axios.get("https://map-pin-app.vercel.app/api/pins");
       setPins(res.data);
     } catch (error) {
       console.log(error);
@@ -60,7 +60,7 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://map-pin-app.vercel.app/pins/${id}`);
+      await axios.delete(`https://map-pin-app.vercel.app/api/pins/${id}`);
       getPins();
     } catch (error) {
       console.log(error);
@@ -71,7 +71,7 @@ function App() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://map-pin-app.vercel.app/pins", {
+      const res = await axios.post("https://map-pin-app.vercel.app/api/pins", {
         username: currentUser,
         title,
         description,
